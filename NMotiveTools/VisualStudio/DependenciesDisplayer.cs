@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace MotiveTools
+namespace NMotiveTools
 {
     public static class DependenciesDisplayer
     {

@@ -1,4 +1,1 @@
-*.suo
-\bin
-\obj
-*.user
+/MotiveUnityServer/bin/x64/Release/MotiveUnityServer.pdb

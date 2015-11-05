@@ -1,6 +1,6 @@
 ﻿using NMotive;
 
-namespace MotiveTools
+namespace NMotiveTools
 {
     public class AdaptativeFillGaps : NMotive.FillGaps
     {

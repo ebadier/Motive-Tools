@@ -1,12 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakToBvhBatch", "TakToBvhBatch.csproj", "{26BC356E-9CC1-4B04-B44B-B36348157370}"
 	ProjectSection(ProjectDependencies) = postProject
 		{49F37EB2-8546-49A5-9FD1-AE8BDF7C8864} = {49F37EB2-8546-49A5-9FD1-AE8BDF7C8864}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotiveTools", "MotiveTools.csproj", "{49F37EB2-8546-49A5-9FD1-AE8BDF7C8864}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMotiveTools", "NMotiveTools.csproj", "{49F37EB2-8546-49A5-9FD1-AE8BDF7C8864}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

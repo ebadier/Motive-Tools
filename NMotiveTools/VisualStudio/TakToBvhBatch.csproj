@@ -123,9 +123,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="MotiveTools.csproj">
+    <ProjectReference Include="NMotiveTools.csproj">
       <Project>{49f37eb2-8546-49a5-9fd1-ae8bdf7c8864}</Project>
-      <Name>MotiveTools</Name>
+      <Name>NMotiveTools</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

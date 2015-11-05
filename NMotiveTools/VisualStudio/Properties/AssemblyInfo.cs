@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Les informations générales relatives à un assembly dépendent de 
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("MotiveTools")]
+[assembly: AssemblyTitle("NMotiveTools")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Université de Fribourg")]
-[assembly: AssemblyProduct("MotiveTools")]
+[assembly: AssemblyProduct("NMotiveTools")]
 [assembly: AssemblyCopyright("CopeLab @ 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
