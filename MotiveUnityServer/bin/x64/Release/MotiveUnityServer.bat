@@ -12,4 +12,4 @@ REM f : Print most recent frame ID
 REM m : Switch Connection Type to Multicast
 REM u : Switch Connection Type to Unicast
 pause
-MotiveUnityServer.exe "" "" "134.21.208.89" "unicast"
+MotiveUnityServer.exe "" "" "127.0.0.1" "unicast"
