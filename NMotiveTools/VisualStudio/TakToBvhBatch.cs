@@ -171,14 +171,17 @@ class TakToBvhBatch
 	{
 		int nbErrors = 0;
 		Log(pLoger, "==> Exporting video...");
-		if (pTake.IsVideoDataStale())
+		if (pTake.HasData(Take.DataType.Video))
 		{
 			string takeDir = Path.GetDirectoryName(pTake.FileName);
 			string videoFilePath = Path.GetFileNameWithoutExtension(pTake.FileName) + "." + pExporter.Extension;
 			videoFilePath = Path.GetFullPath(Path.Combine(takeDir, videoFilePath));
 			try
 			{
-				Result exportResult = pExporter.Export(pTake, videoFilePath, true);
+				//pExporter.FrameRate = VideoExporter.FrameRateValue.Quarter;
+				DataStream videoStream = DataStreamWarehouse.OpenFile(videoFilePath, DataStream.StreamOpenMode.WriteOnly, pExporter.IsBinary);
+				// Works since Motive 1.9.x
+				Result exportResult = pExporter.Export(pTake, videoStream);
 				if (exportResult.Success)
 				{
 					Log(pLoger, String.Format("\t==> Video exported successfully to file {0}", videoFilePath));
@@ -188,6 +191,7 @@ class TakToBvhBatch
 					Log(pLoger, String.Format("\tError : cannot export Video {0} => {1}", videoFilePath, exportResult.Message));
 					nbErrors = 1;
 				}
+				//videoStream.Dispose();
 			}
 			catch (Exception e)
 			{
