@@ -138,9 +138,14 @@ class TakToBvhBatch
 
 					string bvhFilePath = Path.GetFileNameWithoutExtension(pTake.FileName) + "_" + skeleton.Name + "." + pExporter.Extension;
 					bvhFilePath = Path.GetFullPath(Path.Combine(takeDir, bvhFilePath));
-					pExporter.SkeletonName = skeleton.Name;
-					try
+                    try
 					{
+						pExporter.SkeletonName = skeleton.Name;
+						pExporter.Scale = 1.0f;
+						pExporter.StartFrame = pTake.FullFrameRange.Start;
+						pExporter.EndFrame = pTake.FullFrameRange.End;
+						pExporter.FrameRate = (float)pTake.FrameRate;
+
 						Result exportResult = pExporter.Export(pTake, bvhFilePath, true);
 						if (exportResult.Success)
 						{
