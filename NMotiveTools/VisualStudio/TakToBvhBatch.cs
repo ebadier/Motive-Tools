@@ -37,20 +37,30 @@ class TakToBvhBatch
 				{
 					string takeFileFullPath = Path.GetFullPath(takeFile);
 					Log(loger, string.Format("==> Loading take : {0}", takeFileFullPath));
+					Take take = null;
 					try
 					{
-						Take take = new Take(takeFileFullPath);
-						Log(loger, "\t==> Take loaded successfully !");
-						bvhExportErrors += ExportBVHs(take, takeProcessors, bvhExporter, loger);
-						videoExportErrors += ExportVideo(take, videoExporter, loger);
-						// Takes can use a lot of memory. Might not want to wait around for the garbage collector to do its clean up.
-						take.Dispose();
+						take = new Take(takeFileFullPath);
 					}
 					catch (Exception e)
 					{
 						Log(loger, String.Format("\tError : failed to load take {0}: {1}", takeFileFullPath, e.Message));
 						++loadingErros;
 					}
+
+					if(take != null)
+					{
+						Log(loger, "\t==> Take loaded successfully !");
+						int bvhExportEr = 0;
+						if (ExportBVHs(take, takeProcessors, bvhExporter, loger, ref bvhExportEr))
+						{
+							videoExportErrors += ExportVideo(take, videoExporter, loger);
+						}
+						bvhExportErrors += bvhExportEr;
+						// Takes can use a lot of memory. Might not want to wait around for the garbage collector to do its clean up.
+						take.Dispose();
+					}
+
 					Log(loger, "\n================================================================================");
                 }
             }
@@ -97,13 +107,14 @@ class TakToBvhBatch
 		return exporter;
 	}
 
-	static int ExportBVHs(Take pTake, IEnumerable<TakeProcessor> pTakeProcessors, BVHExporter pExporter, StreamWriter pLoger)
+	static bool ExportBVHs(Take pTake, IEnumerable<TakeProcessor> pTakeProcessors, BVHExporter pExporter, StreamWriter pLoger, ref int pNbErrors)
 	{
-		int nbErrors = 0;
-		Log(pLoger, "==> Exporting BVH files (1 per skeleton)... !");
+		pNbErrors = 0;
 		IEnumerable<Node> activeSkels = pTake.Scene.AllSkeletons().Where(skel => skel.Active);
 		if (activeSkels.Count() > 0)
 		{
+			Log(pLoger, "==> Exporting BVH files (1 per skeleton)... !");
+
 			// We will export BVHs only if all processors succeed.
 			bool allProcessesSucceeded = true;
 			foreach (TakeProcessor processor in pTakeProcessors)
@@ -115,7 +126,7 @@ class TakToBvhBatch
 					{
 						Log(pLoger, String.Format("\tError : process {0} failed : {1}", processor.Name, processResult.Message));
 						allProcessesSucceeded = false;
-						++nbErrors;
+						++pNbErrors;
 						break;
 					}
 				}
@@ -123,7 +134,7 @@ class TakToBvhBatch
 				{
 					Log(pLoger, String.Format("\tError : process {0} failed : {1}", processor.Name, e.Message));
 					allProcessesSucceeded = false;
-					++nbErrors;
+					++pNbErrors;
 					break;
 				}
 			}
@@ -154,13 +165,13 @@ class TakToBvhBatch
 						else
 						{
 							Log(pLoger, String.Format("\tError : cannot export BVH {0}/{1} : {2} => {3}", i+1, activeSkels.Count(), bvhFilePath, exportResult.Message));
-							++nbErrors;
+							++pNbErrors;
 						}
 					}
 					catch (Exception e)
 					{
 						Log(pLoger, String.Format("\tError : cannot export BVH {0}/{1} : {2} => {3}", i+1, activeSkels.Count(), bvhFilePath, e.Message));
-						++nbErrors;
+						++pNbErrors;
 					}
 				}
 			}
@@ -168,8 +179,9 @@ class TakToBvhBatch
 		else
 		{
 			Log(pLoger, "\t==> No active skeleton found !");
+			return false;
 		}
-		return nbErrors;
+		return pNbErrors == 0;
 	}
 
 	static int ExportVideo(Take pTake, VideoExporter pExporter, StreamWriter pLoger)

@@ -83,10 +83,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NMotive, Version=1.0.5694.23432, Culture=neutral, PublicKeyToken=42f29766e5de17f3, processorArchitecture=AMD64">
+    <Reference Include="NMotive, Version=1.8.5777.30181, Culture=neutral, PublicKeyToken=42f29766e5de17f3, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\OptiTrack\Motive\assemblies\x64\NMotive.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
