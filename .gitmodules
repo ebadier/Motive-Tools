@@ -1,0 +1,3 @@
+[submodule "MotiveUnityClient"]
+	path = MotiveUnityClient
+	url = https://github.com/ebadier/Motive-UnityClient.git
