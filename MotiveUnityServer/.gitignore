@@ -1,4 +1,5 @@
 /bin/x64/Release/MotiveUnityServer.pdb
 /obj
+*/ipch
 *.suo
 *.sdf

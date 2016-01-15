@@ -324,7 +324,9 @@ void SendFrameToUnity(sFrameOfMocapData *data, void *pUserData)
         doc.LinkEndChild( decl );  
 
         TiXmlElement * root = new TiXmlElement( "Stream" );  
-        doc.LinkEndChild( root );  
+        doc.LinkEndChild( root );
+		root->SetAttribute("Frame", data->iFrame);
+		root->SetDoubleAttribute("Time", data->fTimestamp);
 
         TiXmlElement * skeletons = new TiXmlElement( "Skeletons" );  
         root->LinkEndChild( skeletons );  
