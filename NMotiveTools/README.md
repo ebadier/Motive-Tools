@@ -1,5 +1,5 @@
 # NMotiveTools
-C# scripts relative to the NMotive API (see http://wiki.optitrack.com/index.php?title=Motive_Batch_Processor)
+C# scripts relative to the [NMotive API](http://wiki.optitrack.com/index.php?title=Motive_Batch_Processor)
 
 # TakToBvhBatch
 This software allows you to automatically export the existing takes in a given directory and its sub-directories.
